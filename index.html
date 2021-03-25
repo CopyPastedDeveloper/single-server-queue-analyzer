@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<style>
+    html{
+        font-family:Century 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif !important;
+
+    }
+    #h3{
+        align-content: center;
+        margin-left: 20px;
+        margin-bottom: 20px;
+    }
+    body{
+        background-color: rgb(233, 218, 218);
+    }
+    /* .footer{
+      background-color: black;
+      height: 50px;
+    } */
+  
+</style>
+
+<body> 
+    <div class="container-fluid mb-5">
+        <div class="row mb-5 bg-dark text-capitalize text-light text-center">
+            <div class="text-center">
+                <h3 id="h3">Single Server Queue Analyzer</h3>
+            </div>
+            <div id="button">
+                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#myModal" style="margin-left: 683pt; border-color:black; margin-top: 20px;">
+                    Simulate
+                  </button>
+            </div>
+        </div>
+        <div class="card-columns">
+          <div class="card bg-primary mt-2">
+              <div class="card-header text-center">
+                <h4 class="card-text">Average Time Between Arrival</h4>
+              </div>
+            <div class="card-body text-center h-100 mb-lg-5">
+              <h3 id="dashboardDataAverageTimeBetweenArrival"></h3>
+            </div>
+            <div class="card-footer text-center">
+              <p class="card-text">Intermediate Calculations</p>
+            </div>
+          </div>
+          <div class="card bg-warning">
+              <div class="card-header text-center">
+                <h4 class="card-text">Average Service Time</h4>
+              </div>
+            <div class="card-body text-center h-100 mb-lg-5">
+              <h3 id="dashboardDataAverageTimeService"></h3> 
+            </div>
+            <div class="card-footer text-center">
+              <p class="card-text">Intermediate Calculations</p>
+            </div>
+          </div>
+          <div class="card bg-success">
+              <div class="card-header text-center">
+                <h4 class="card-text">Rho (Average Server Utilization)</h4>
+              </div>
+            <div class="card-body text-center h-100 mb-lg-5">
+                 <h3 id="dashboardDataAverageServerUtilization"></h3> 
+            </div>
+            <div class="card-footer text-center">
+              <p class="card-text">Performance measures</p>
+            </div>
+          </div>
+          <div class="card bg-danger mt-2">
+              <div class="card-header text-center">
+                <h4 class="card-text">PO (Probability the System is Empty)</h4>
+              </div>
+            <div class="card-body text-center h-100 mb-lg-5">
+              <h3 id="dashboardDataProbabilityTheSystemIsEmpty"></h3> 
+            </div>
+            <div class="card-footer text-center">
+              <p class="card-text">Performance measures</p>
+            </div>
+          </div>  
+          <div class="card bg-light">
+              <div class="card-header text-center">
+                <h4 class="card-text">L (Average Number in the System)</h4>
+              </div>
+            <div class="card-body text-center h-100 mb-lg-5">
+              <h3  id="dashboardDataAverageNumberInTheSystem"></h3> 
+            </div>
+            <div class="card-footer text-center">
+              <p class="card-text">Performance measures</p>
+            </div>
+          </div>
+          <div class="card bg-info">
+              <div class="card-header text-center">
+                <h4 class="card-text">Lq (Average Number Waiting in the Queue)</h4>
+              </div>
+            <div class="card-body text-center h-100 mb-lg-5">
+              <h3 id="dashboardDataAverageNumberWaitingInTheQueue"></h3> 
+            </div>
+            <div class="card-footer text-center">
+              <p class="card-text">Performance measures</p>
+            </div>
+          </div>
+          <div class="card badge-primary mt-2">
+              <div class="card-header text-center">
+                <h4 class="card-text">W (Average time in the System)</h4>
+              </div>
+            <div class="card-body text-center h-100 mb-lg-5"> 
+                <h3 id="dashboardDataAverageTimeInTheSystem"></h3>
+            </div>
+            <div class="card-footer text-center">
+              <p class="card-text">Performance measures</p>
+            </div>
+          </div>
+          <div class="card bg-success ">
+              <div class="card-header text-center">
+                <h4 class="card-text">W (Average time in the Queue)</h4>
+              </div>
+            <div class="card-body text-center h-100 mb-lg-5">
+                <h3 id="dashboardDataAverageTimeInTheQueue"></h3> 
+            </div>
+            <div class="card-footer text-center">
+              <p class="card-text">Performance measures</p>
+            </div>
+          </div>
+          <div class="card bg-secondary">
+              <div class="card-header text-center">
+                <h4 class="card-text">Probability</h4>
+              </div>
+            <div class="card-body text-center h-100 mb-lg-5">
+                <h3 id="dashboardDataProbability"></h3> 
+            </div>
+            <div class="card-footer text-center">
+              <p class="card-text">Probability of a specific number of customer in the system</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="container"></div>
+        <div class="modal" id="myModal">
+            <div class="modal-dialog">
+              <div class="modal-content">
+              
+                <!-- Modal Header -->
+                <div class="modal-header">
+                  <h4 class="modal-title">Simulation Inputs</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form id="form">
+                      <div class="form-group">
+                        <label class="floating-label">Time Unit:</label>
+                        <input type="number" placeholder="hour" class="form-control" id="">
+                      </div>
+                        <div class="form-group">
+                            <label>Arrival Rate (lambda):</label>
+                            <input type="number" placeholder="customer/hour" class="form-control" id="arrivalRate">
+                          </div>
+                          <div class="form-group">
+                            <label>Service Rate (mu):</label>
+                            <input type="number" placeholder="custormer/hour" class="form-control" id="serviceRate">
+                          </div>
+                          <div class="form-group">
+                            <label>Number:</label>
+                            <input type="number" class="form-control" id="eNumber">
+                          </div>
+                      </form>
+                </div>
+                
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" onclick="calculate()" style="margin-right:233pt;">Calculate</button>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+      </div>
+    
+
+<script type="text/javascript" href="bootstrap-4.4.1-dist/js/bootstrap.min.js"></script>
+
+
+<script type="text/javascript">
+		function calculate() {
+
+			var inputVal1 = document.getElementById("arrivalRate").value;
+			var inputVal2 = document.getElementById("serviceRate").value;
+			var inputVal3 = document.getElementById("eNumber").value;
+
+			var simulate1 = 1 / parseFloat(inputVal1);
+			var simulate2 = 1 / parseFloat(inputVal2);
+			var simulate3 = parseFloat(inputVal1) / parseFloat(inputVal2);
+			var simulate4 = 1 - parseFloat(simulate3);
+			var simulate5 = parseFloat(inputVal1) / (parseFloat(inputVal2)-parseFloat(inputVal1));
+			var simulate6 = parseFloat(simulate3) * parseFloat(simulate5);
+			var simulate7 = 1 / (parseFloat(inputVal2)-parseFloat(inputVal1));
+			var simulate8 = parseFloat(simulate3) * parseFloat(simulate7);
+			var simulate = 1;
+			while (inputVal3 != 0){
+				simulate = simulate * simulate3;
+				--inputVal3;
+			}
+			var simulate9 = (1-parseFloat(simulate3)) * parseFloat(simulate);
+				
+			document.getElementById("dashboardDataAverageTimeBetweenArrival").innerHTML="" + simulate1.toFixed(6) + " " + " " +  "(hour)";
+			document.getElementById("dashboardDataAverageTimeService").innerHTML="" + simulate2.toFixed(2) + " " + " " +  "(hour)";
+			document.getElementById("dashboardDataAverageServerUtilization").innerHTML="" + simulate3.toFixed(2);
+			document.getElementById("dashboardDataProbabilityTheSystemIsEmpty").innerHTML="" + simulate4.toFixed(2);
+			document.getElementById("dashboardDataAverageNumberInTheSystem").innerHTML="" + simulate5.toFixed() + " " + " " +  "(customers)";	
+			document.getElementById("dashboardDataAverageNumberWaitingInTheQueue").innerHTML="" + simulate6.toFixed(2) + " " + " " +  "(customers)";	
+			document.getElementById("dashboardDataAverageTimeInTheSystem").innerHTML="" + simulate7.toFixed(1) + " " + " " +  "(hour)";
+			document.getElementById("dashboardDataAverageTimeInTheQueue").innerHTML="" + simulate8.toFixed(2) + " " + " " +  "(hour)";
+			document.getElementById("dashboardDataProbability").innerHTML="" + simulate9.toFixed(6);
+
+      arrivalRate.value = "";
+      serviceRate.value = "";
+      eNumber.value = "";
+        
+
+		}
+
+</script>
+<div class="footer text-center">
+    <p style="color: rgb(0, 0, 255);">Copyright &copy;<span>Jhonel Vertudazo</span> All rights Reserved 2021</p>
+  </div>
+</body>
+</html>
